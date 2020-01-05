@@ -8,7 +8,6 @@ import android.widget.TextView;
 import com.runtop.android.functionlibrary.R;
 import com.runtop.android.functionlibrary.Tools.StringTool;
 
-import androidx.annotation.NonNull;
 
 /**
  * 加载进度条
