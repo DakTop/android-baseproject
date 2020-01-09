@@ -8,9 +8,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 
 import io.reactivex.schedulers.Schedulers;
 
-public class SchedulerTransformer implements ObservableTransformer {
+public class SchedulerTransformer<T> implements ObservableTransformer<T,T> {
     @Override
-    public ObservableSource apply(Observable upstream) {
+    public ObservableSource<T> apply(Observable<T> upstream) {
         return upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 }

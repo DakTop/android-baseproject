@@ -38,14 +38,13 @@ public class ObserverHandler<T> implements Observer<T> {
     @Override
     public void onNext(T t) {
         cancelDialog();
-//        observerListener.onSuccess(t);
-        onSuccess(t);
+        observerListener.onSuccess(t);
     }
 
     @Override
     public void onError(Throwable e) {
         cancelDialog();
-//        observerListener.onFail("请求异常");
+        observerListener.onFail("请求异常");
     }
 
     @Override
@@ -55,11 +54,8 @@ public class ObserverHandler<T> implements Observer<T> {
 
     private void cancelDialog() {
         if (lodingDialog != null) {
-            lodingDialog.dismiss();
+            lodingDialog.cancel();
         }
-    }
-
-    public void onSuccess(T t) {
     }
 
 }
