@@ -109,7 +109,6 @@ public class DownloadTool {
             while ((len = is.read(buff)) != -1) {
                 os.write(buff, 0, len);
                 currentLength += len;
-                Log.e(TAG, "当前进度: " + currentLength);
                 downloadListener.onProgress((int) (100 * currentLength / totalLength));
                 if ((int) (100 * currentLength / totalLength) == 100) {
                     downloadListener.onFinish(mVideoPath);
