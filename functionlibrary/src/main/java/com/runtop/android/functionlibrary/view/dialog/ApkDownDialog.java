@@ -113,17 +113,10 @@ public class ApkDownDialog extends BaseDialog implements View.OnClickListener {
 
             @Override
             public void onProgress(final int currentLength) {
-                activity.get().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Log.i("下载进度:", currentLength + "");
-                    }
-                });
-
-//                Message message = Message.obtain();
-//                message.arg1 = currentLength;
-//                message.what = 1;
-//                handler.sendMessage(message);
+                Message message = Message.obtain();
+                message.arg1 = currentLength;
+                message.what = 1;
+                handler.sendMessage(message);
             }
 
             @Override
