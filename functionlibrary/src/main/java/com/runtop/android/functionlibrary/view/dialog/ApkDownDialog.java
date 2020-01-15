@@ -55,7 +55,7 @@ public class ApkDownDialog extends BaseDialog implements View.OnClickListener {
     ;
 
     public ApkDownDialog(@NonNull Activity context) {
-        super(context);
+        super(context, R.style.dialog);
         activity = new SoftReference<>(context);
     }
 
@@ -72,7 +72,7 @@ public class ApkDownDialog extends BaseDialog implements View.OnClickListener {
     public void onClick(View v) {
         if (v.getId() == R.id.tv_download) {
             handler = new ProgressHandler(this);
-            tvDownload.setVisibility(View.GONE);
+            tvDownload.setVisibility(View.INVISIBLE);
             tvDownloadProgress.setVisibility(View.VISIBLE);
             if (KbPermissionUtils.needRequestPermission()) { //判断是否需要动态申请权限
                 KbPermission.with(activity.get())
@@ -106,7 +106,6 @@ public class ApkDownDialog extends BaseDialog implements View.OnClickListener {
                 activity.get().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-//                        mCircleProgressLayout.setVisibility(View.VISIBLE);
                     }
                 });
             }
@@ -125,7 +124,8 @@ public class ApkDownDialog extends BaseDialog implements View.OnClickListener {
                 activity.get().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
+                        tvDownloadProgress.setVisibility(View.INVISIBLE);
+                        ApkDownDialog.this.cancel();
                     }
                 });
             }
