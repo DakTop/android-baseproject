@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.runtop.android.base.BaseActivity;
 import com.runtop.android.baselibrary.network.RetrofitClient;
 import com.runtop.android.baselibrary.retrofit.SchedulerTransformer;
 import com.runtop.android.functionlibrary.Tools.download.DownloadTool;
@@ -21,7 +22,7 @@ import com.runtop.android.functionlibrary.view.dialog.ApkDownDialog;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     TestApi api;
 
