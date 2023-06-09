@@ -1,30 +1,15 @@
 apply plugin: 'com.android.library'
-android {
-    compileSdkVersion 28
 
+android {
+    compileSdkVersion 31
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-
+        minSdkVersion 21
+        targetSdkVersion 31
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
-
-    }
-
-    buildTypes {
-        debug {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "BaseUrl", rootProject.ext.debugURL["baseUrl"])// etc.
-        }
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "BaseUrl", rootProject.ext.releaseURL["baseUrl"])
-        }
+        buildConfigField("String", "BaseUrl", rootProject.ext.releaseURL["baseUrl"])
+        buildConfigField("String", "TestUrl", rootProject.ext.testURL["testUrl"])
     }
 
 }
@@ -36,10 +21,31 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-
-    api 'com.squareup.retrofit2:retrofit:2.7.0'
-    api 'com.squareup.okhttp3:okhttp:4.2.2'
-    api 'com.squareup.retrofit2:adapter-rxjava2:2.7.0'
-    api 'org.ligboy.retrofit2:converter-fastjson-android:2.1.0'
-    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    //https://github.com/square/retrofit
+    //https://github.com/square/retrofit/tree/master/retrofit-adapters/rxjava3
+    //https://github.com/square/okhttp
+    //https://github.com/ReactiveX/RxAndroid
+    //https://github.com/alibaba/fastjson/tree/master
+    //https://github.com/alibaba/fastjson/wiki/Android%E7%89%88%E6%9C%AC
+    //https://repo1.maven.org/maven2/com/alibaba/fastjson/
+    //https://github.com/trello/RxLifecycle
+    //https://github.com/google/gson
+    //https://github.com/greenrobot/EventBus
+    api 'com.squareup.retrofit2:retrofit:2.9.0'
+    api 'com.squareup.retrofit2:converter-gson:2.9.0'
+    api 'com.squareup.okhttp3:okhttp:4.9.3'
+    api 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
+    api 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    api 'com.trello.rxlifecycle4:rxlifecycle-android:4.0.2'
+    api 'com.trello.rxlifecycle4:rxlifecycle-components:4.0.2'
+    api 'org.greenrobot:eventbus:3.3.1'
+    //如果网络请求参数使用fastjson解析则打开下列注释然后，添加.addConverterFactory(FastJsonConverterFactory.create())：
+    //      retrofit = new Retrofit.Builder()
+    //                .baseUrl(BuildConfig.BaseUrl)
+    //                .client(okHttpClient)
+    //                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+    //                .addConverterFactory(FastJsonConverterFactory.create())
+    //                .build();
+    //    'org.ligboy.retrofit2:converter-fastjson-android:2.1.0'//次引入包不可用，里面源码可参考
+    api 'com.alibaba:fastjson:2.0.4.android'//使用时检查是否为最新版fastjson
 }

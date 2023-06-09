@@ -2,8 +2,7 @@ package com.runtop.android.functionlibrary.view.dialog;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
-import android.content.DialogInterface;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,23 +13,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.runtop.android.functionlibrary.R;
-import com.runtop.android.functionlibrary.Tools.download.DownloadTool;
-import com.runtop.android.functionlibrary.Tools.download.listener.DownloadListener;
-import com.runtop.android.functionlibrary.Tools.permission.KbPermission;
-import com.runtop.android.functionlibrary.Tools.permission.KbPermissionListener;
-import com.runtop.android.functionlibrary.Tools.permission.KbPermissionUtils;
-import com.runtop.android.functionlibrary.view.base.BaseDialog;
+import com.runtop.android.functionlibrary.Helper.download.DownloadHelper;
+import com.runtop.android.functionlibrary.Helper.download.listener.DownloadListener;
+import com.runtop.android.functionlibrary.Helper.permission.KbPermission;
+import com.runtop.android.functionlibrary.Helper.permission.KbPermissionListener;
+import com.runtop.android.functionlibrary.Helper.permission.KbPermissionHelper;
 
 import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 
 import androidx.annotation.NonNull;
 
-public class ApkDownDialog extends BaseDialog implements View.OnClickListener {
+public class ApkDownDialog extends Dialog implements View.OnClickListener {
 
     private TextView tvDownload;
     private ProgressBar tvDownloadProgress;
-    private DownloadTool downloadTool;
+    private DownloadHelper downloadTool;
     private SoftReference<Activity> activity;
     private ProgressHandler handler;
 
@@ -47,6 +45,8 @@ public class ApkDownDialog extends BaseDialog implements View.OnClickListener {
             switch (msg.what) {
                 case 1:
                     dialog.get().progress(msg.arg1);
+                    break;
+                default:
                     break;
             }
         }
@@ -74,7 +74,7 @@ public class ApkDownDialog extends BaseDialog implements View.OnClickListener {
             handler = new ProgressHandler(this);
             tvDownload.setVisibility(View.INVISIBLE);
             tvDownloadProgress.setVisibility(View.VISIBLE);
-            if (KbPermissionUtils.needRequestPermission()) { //判断是否需要动态申请权限
+            if (KbPermissionHelper.needRequestPermission()) { //判断是否需要动态申请权限
                 KbPermission.with(activity.get())
                         .requestCode(100)
                         .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE) //需要申请的权限(支持不定长参数)
@@ -86,7 +86,7 @@ public class ApkDownDialog extends BaseDialog implements View.OnClickListener {
 
                             @Override
                             public void onCancel(int requestCode, String... permission) { //拒绝权限的回调
-                                KbPermissionUtils.goSetting(activity.get()); //跳转至当前app的权限设置界面
+                                KbPermissionHelper.goSetting(activity.get()); //跳转至当前app的权限设置界面
                             }
                         })
                         .send();
@@ -98,7 +98,7 @@ public class ApkDownDialog extends BaseDialog implements View.OnClickListener {
 
 
     private void downloadVideo() {
-        downloadTool = new DownloadTool();
+        downloadTool = new DownloadHelper();
         downloadTool.downloadFile("http://gdown.baidu.com/data/wisegame/97a1b097cad18e3c/QQ_1296.apk", new DownloadListener() {
             @Override
             public void onStart() {

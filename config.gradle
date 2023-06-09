@@ -1,9 +1,9 @@
 ext {
     releaseURL = [
-            "baseUrl": "\"http://47.105.52.140:8081\"",
+            "baseUrl": "\"https://dev.liantuofu.com/\"",
     ]
 
-    debugURL = [
-            "baseUrl": "\"http://47.105.52.140:8081\"",
+    testURL = [
+            "testUrl": "\"https://testapi.liantuofu.com/dev/\"",
     ]
 }

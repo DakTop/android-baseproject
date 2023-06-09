@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 31
 
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 28
+        minSdkVersion 21
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
 
@@ -30,5 +30,12 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    //
     api project(":baselibrary")
+    //上拉加载下拉刷新：https://github.com/scwang90/SmartRefreshLayout
+    implementation  'io.github.scwang90:refresh-layout-kernel:2.0.6'      //核心必须依赖
+    implementation  'io.github.scwang90:refresh-header-classics:2.0.6'    //经典刷新头
+    implementation  'io.github.scwang90:refresh-footer-classics:2.0.6'    //经典加载
+    //三方屏幕适配方案AndroidAutoSize：https://github.com/JessYanCoding/AndroidAutoSize
+    implementation 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
 }

@@ -1,0 +1,11 @@
+本项目采用模块化架构：
+
+baselibrary：属于最底层库，主要盛放三方依赖包、非UI性质的核心功能
+functionlibrary：属于中间的功能层，为app层提供最新基本的、通用的UI或非UI功能，同时也封装了基本通用的基类。
+app：业务层。
+
+依赖关系：app依赖--》functionlibrary依赖--》baselibrary
+
+baselibrary：目前封装的功能有：网络请求(fastjson 数据解析)、各种工具类、SharedPreferences模块
+
+functionlibrary：包含屏幕适配方案AppDensity、完整的文件下载功能、apk更新弹窗、权限操作功能、常用工具类、加载进度条、SmartRefreshLayout上拉加载下拉刷新、三方屏幕适配方案AndroidAutoSize。
